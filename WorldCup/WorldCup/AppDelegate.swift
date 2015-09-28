@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if (results == 0) {
       
       var fetchError: NSError? = nil
-      
+			
       do {
         let results =
           try coreDataStack.context.executeFetchRequest(fetchRequest)
@@ -65,7 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let jsonURL = NSBundle.mainBundle().URLForResource("seed", withExtension: "json")
     let jsonData = NSData(contentsOfURL: jsonURL!)
     
-    var error: NSError? = nil
     let jsonArray = (try! NSJSONSerialization.JSONObjectWithData(jsonData!, options: [])) as! NSArray
     
     let entity = NSEntityDescription.entityForName("Team", inManagedObjectContext: coreDataStack.context)

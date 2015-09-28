@@ -12,8 +12,8 @@ import CoreData
 class Team: NSManagedObject {
   
   @NSManaged var teamName: String
-  @NSManaged var qualifyingZone: String
+  @NSManaged var qualifyingZone: String // 预选赛区
   @NSManaged var imageName: String
-  @NSManaged var wins: NSNumber
+  @NSManaged var wins: NSNumber 
   
 }

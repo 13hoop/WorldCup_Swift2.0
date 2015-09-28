@@ -68,6 +68,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B4A85ADF1BB51D7E00BD3D9A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FEDBB488198D5E9B00837C8F /* seed.json */,
+				FE10CD9A198D913700ACA4CE /* attribution.txt */,
+				FEDBB48A198D5EC100837C8F /* WorldCup.xcdatamodeld */,
+				FEDBB48D198D5F2B00837C8F /* Team.swift */,
+				FEDBB48F198D607C00837C8F /* CoreDataStack.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		FEDBB45D198D4D0E00837C8F = {
 			isa = PBXGroup;
 			children = (
@@ -90,16 +102,12 @@
 			isa = PBXGroup;
 			children = (
 				FEDBB46B198D4D0E00837C8F /* AppDelegate.swift */,
-				FEDBB48F198D607C00837C8F /* CoreDataStack.swift */,
 				FEDBB46D198D4D0E00837C8F /* ViewController.swift */,
 				FEDBB495198D652100837C8F /* TeamCell.swift */,
-				FEDBB48D198D5F2B00837C8F /* Team.swift */,
+				B4A85ADF1BB51D7E00BD3D9A /* Data */,
 				FEDBB46F198D4D0E00837C8F /* Main.storyboard */,
 				B4E03A001BB518A300C0E46A /* Launch Screen.storyboard */,
-				FEDBB48A198D5EC100837C8F /* WorldCup.xcdatamodeld */,
 				FEDBB472198D4D0E00837C8F /* Images.xcassets */,
-				FE10CD9A198D913700ACA4CE /* attribution.txt */,
-				FEDBB488198D5E9B00837C8F /* seed.json */,
 				FEDBB469198D4D0E00837C8F /* Supporting Files */,
 			);
 			path = WorldCup;
@@ -176,7 +184,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Razeware;
 				TargetAttributes = {
 					FEDBB465198D4D0E00837C8F = {
@@ -293,6 +301,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -357,6 +366,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = WorldCup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.razeware.worldcup.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -369,6 +379,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = WorldCup/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.razeware.worldcup.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -388,6 +399,7 @@
 				);
 				INFOPLIST_FILE = WorldCupTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.razeware.worldcup.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -403,6 +415,7 @@
 				);
 				INFOPLIST_FILE = WorldCupTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.razeware.worldcup.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};

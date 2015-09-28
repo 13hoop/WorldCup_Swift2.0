@@ -50,11 +50,9 @@ class CoreDataStack {
       print("Error adding persistent store: \(error)")
       abort()
     }
-    
   }
   
   func saveContext() {
-    
     var error: NSError? = nil
     if context.hasChanges {
       do {
@@ -64,7 +62,6 @@ class CoreDataStack {
         print("Could not save: \(error), \(error?.userInfo)")
       }
     }
-    
   }
   
   func applicationDocumentsDirectory() -> NSURL {
