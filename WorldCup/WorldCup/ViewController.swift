@@ -33,12 +33,19 @@ class ViewController: UIViewController {
 	func setFetchController() {
 		// 1 创建请求 ＋ 指定排序
 		let fetchRequset = NSFetchRequest(entityName: "Team")
-		let sortDescriptor = NSSortDescriptor(key: "teamName", ascending: true)
-		fetchRequset.sortDescriptors = [sortDescriptor]
 		
+//		let sortDescriptor = NSSortDescriptor(key: "teamName", ascending: true)
+//		fetchRequset.sortDescriptors = [sortDescriptor]
+
+		// 更改排序 - 注意排序不要冲突，否则会乱掉
+		let zoneSort = NSSortDescriptor(key: "qualifyingZone", ascending: true)
+		let scoreSort = NSSortDescriptor(key: "wins", ascending: true)
+		let nameSort = NSSortDescriptor(key: "teamName", ascending: true)
+		fetchRequset.sortDescriptors = [zoneSort, scoreSort, nameSort]
 		
 		// 2 fetch控制器的实例话仍然依赖于 NSFetchRequest 和 context上下文
-		fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequset, managedObjectContext: coreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+		// 更改使用keyPath“qualifyingZone”做实例化
+		fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequset, managedObjectContext: coreDataStack.context, sectionNameKeyPath: "qualifyingZone", cacheName: nil)
 
 		// 3 控制器执行获取 －－performFetch && 错误处理 
 		do {
@@ -53,6 +60,11 @@ class ViewController: UIViewController {
     (tableView: UITableView) -> Int {
       return fetchedResultsController.sections!.count
   }
+	// 设置title
+	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		let sectionInfo = fetchedResultsController.sections![section]
+		return sectionInfo.name
+	}
   func tableView(tableView: UITableView,
     numberOfRowsInSection section: Int) -> Int {
       let sectionInfo = fetchedResultsController.sections![section] 
