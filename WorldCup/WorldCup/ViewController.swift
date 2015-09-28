@@ -84,7 +84,15 @@ class ViewController: UIViewController {
   // MARK: -- tableView delegat --
   func tableView(tableView: UITableView,
     didSelectRowAtIndexPath indexPath: NSIndexPath) {
-      
+
+			let team = fetchedResultsController.objectAtIndexPath(indexPath) as! Team
+			// tap加1 操作
+			let wins = team.wins.integerValue
+			team.wins = NSNumber(integer: wins + 1) // 类型转换
+			// 保存
+			coreDataStack.saveContext()
+			// 刷新UI
+			tableView.reloadData()
   }
 }
 

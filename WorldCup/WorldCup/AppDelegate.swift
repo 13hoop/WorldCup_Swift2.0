@@ -31,8 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillTerminate(application: UIApplication) {
     coreDataStack.saveContext()
   }
-  
-  func importJSONSeedDataIfNeeded() {
+
+	// MARK: - 从JSON读取数据
+	func importJSONSeedDataIfNeeded() {
     
     let fetchRequest = NSFetchRequest(entityName: "Team")
     var error: NSError? = nil
@@ -60,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       importJSONSeedData()
     }
   }
-  
   func importJSONSeedData() {
     let jsonURL = NSBundle.mainBundle().URLForResource("seed", withExtension: "json")
     let jsonData = NSData(contentsOfURL: jsonURL!)
