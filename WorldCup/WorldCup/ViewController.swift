@@ -45,7 +45,8 @@ class ViewController: UIViewController {
 		
 		// 2 fetch控制器的实例话仍然依赖于 NSFetchRequest 和 context上下文
 		// 更改使用keyPath“qualifyingZone”做实例化
-		fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequset, managedObjectContext: coreDataStack.context, sectionNameKeyPath: "qualifyingZone", cacheName: nil)
+		// 再次更改，指定cache的name
+		fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequset, managedObjectContext: coreDataStack.context, sectionNameKeyPath: "qualifyingZone", cacheName: "worldCup")
 
 		// 3 控制器执行获取 －－performFetch && 错误处理 
 		do {
