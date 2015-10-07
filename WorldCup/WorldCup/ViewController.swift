@@ -57,6 +57,44 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
+    // MARK: 震动激活添加按钮
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if motion == UIEventSubtype.MotionShake {
+            addButton.enabled = true
+        }
+    }
+    @available(iOS 8.0, *)
+    @IBAction func addTeam(sender: AnyObject) {
+        let alert = UIAlertController(title: "天朝特色", message: "目前看来中国足球进世界杯只能用这种手段了", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.placeholder = "Team name"
+        }
+        alert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.placeholder = "Qualifying Zone"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            print("－－开始保送国足－－")
+            // 1
+            let nameTextFeild = alert.textFields![0] 
+            let zoneTextFeild = alert.textFields![1] 
+            // 2 新插入一个实体－－当然就是万年进不了的国足了
+            let team = NSEntityDescription.insertNewObjectForEntityForName("Team", inManagedObjectContext: self.coreDataStack.context) as! Team
+            team.teamName = nameTextFeild.text!
+            team.qualifyingZone = zoneTextFeild.text!
+            team.imageName = "wenderland-flag"
+            // 3
+            self.coreDataStack.saveContext()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+            print("被cancel，果然上帝都要放弃国足了🙀")
+        }))
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+
     // MARK: -- DataSource --
     func numberOfSectionsInTableView
         (tableView: UITableView) -> Int {
@@ -114,20 +152,22 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         // 开始更新
         tableView.beginUpdates()
+        print(__FUNCTION__)
     }
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        
-        print("move \(indexPath!) -> \(newIndexPath!)")
+        print(__FUNCTION__)
+        print("move \(indexPath) -> \(newIndexPath)")
         /*
         根据数据的不同type，进行区分操作
-            - Insert
+            - Insert - 注意插入时，用newIndexPath
             - Delete
             - Update
-            - Move
+            - Move － 删除旧的（indexPath），插入新的(newIndexPath)
         */
         switch type {
         case NSFetchedResultsChangeType.Insert:
-            tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            //        tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case NSFetchedResultsChangeType.Delete:
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case NSFetchedResultsChangeType.Update:
@@ -143,9 +183,11 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         // 结束更新
         tableView.endUpdates()
+        print(__FUNCTION__)
     }
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         
+        print(__FUNCTION__)
         let indexSet = NSIndexSet(index: sectionIndex)
         
         switch type {
@@ -156,6 +198,5 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
         default:
             break
         }
-        
     }
 }
