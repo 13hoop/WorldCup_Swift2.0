@@ -63,7 +63,9 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
             addButton.enabled = true
         }
     }
+    
     @available(iOS 8.0, *)
+    // 国足走后门专用方法
     @IBAction func addTeam(sender: AnyObject) {
         let alert = UIAlertController(title: "天朝特色", message: "目前看来中国足球进世界杯只能用这种手段了", preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -152,10 +154,10 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         // 开始更新
         tableView.beginUpdates()
-        print(__FUNCTION__)
+        print(#function)
     }
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        print(__FUNCTION__)
+        print(#function)
         print("move \(indexPath) -> \(newIndexPath)")
         /*
         根据数据的不同type，进行区分操作
@@ -176,18 +178,16 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
 //            tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        default :
-            break
         }
     }
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         // 结束更新
         tableView.endUpdates()
-        print(__FUNCTION__)
+        print(#function)
     }
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         
-        print(__FUNCTION__)
+        print(#function)
         let indexSet = NSIndexSet(index: sectionIndex)
         
         switch type {
